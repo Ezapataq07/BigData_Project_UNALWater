@@ -1,0 +1,40 @@
+FROM python:3.11-slim
+
+# Configurar variables de entorno para spark
+ENV SPARK_VERSION=3.5.0
+ENV HADOOP_VERSION=3
+ENV SPARK_HOME=/opt/spark
+ENV PATH="${SPARK_HOME}/bin:${PATH}"
+# Configura PySpark
+ENV PYSPARK_PYTHON=python3
+ENV PYSPARK_DRIVER_PYTHON=python3
+
+# Instalar dependencia del sistema operativo
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    openjdk-17-jre-headless \
+    curl \
+    bash \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Descargar e intalar spark
+RUN curl -fSL "https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz" -o /tmp/spark.tgz \
+    && mkdir -p ${SPARK_HOME} \
+    && tar -zxvf /tmp/spark.tgz -C ${SPARK_HOME} --strip-components=1 \
+    && rm /tmp/spark.tgz
+
+# Configurar entorno y librerías de python
+WORKDIR /app
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir \
+    "pyspark==${SPARK_VERSION}" \
+    -r requirements.txt
+
+COPY . .
+
+# Exponer los puertos
+EXPOSE 4040
+
+# Ejecutar script
+CMD ["python", "producer_api.py"]
