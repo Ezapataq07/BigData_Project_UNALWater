@@ -1,0 +1,13 @@
+services:
+  unal-water-producer:
+    build: .
+    container_name: producer_app
+    ports:
+      - "4044:4040"
+    volumes:
+      - ./src:/app/src
+      - ./config:/app/config
+      - ./data:/app/data
+    env_file:
+      - ./.env
+    command: python src/producer_api.py
