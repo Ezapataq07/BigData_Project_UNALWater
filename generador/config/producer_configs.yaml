@@ -1,3 +1,2 @@
-dbfs_dest_path_base: /Volumes/main/default/mi_volumen_de_ingesta/my_app_data/
-# dbfs_dest_path_base: /Volumes/workspace/bronze/staging/sales/
+dbfs_dest_path_base: /Volumes/adb_big_data_unal_water/bronze/staging/sales/
 upload_interval_seconds: 30

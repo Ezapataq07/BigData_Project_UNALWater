@@ -164,9 +164,10 @@ def generar_registro(ids_clientes, ids_empleados, coordinates):
     poligono = Polygon(coordinates[0])
     punto_aleatorio = generar_punto_aleatorio_en_poligono(poligono)
 
-    # Obtener fecha-hora actual
-    now = datetime.now()
-    fecha_formateada = now.strftime("%d/%m/%Y %H:%M:%S") # Formatear "12/05/2024 10:43:19"
+    # Establecer la zona horaria de Bogotá
+    zona_bogota = pytz.timezone('America/Bogota')
+    # Obtener fecha-hora actual en Bogotá
+    fecha_formateada = datetime.now(zona_bogota).strftime("%d/%m/%Y %H:%M:%S") # Formatear "12/05/2024 10:43:19"
 
     # Generar número aleatorio
     cantidad = random.randint(1, 100)
