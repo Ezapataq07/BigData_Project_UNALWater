@@ -216,13 +216,8 @@ if __name__ == "__main__":
             dbfs_file_name = f"data_{fecha_hora}.json"
             dbfs_full_path = os.path.join(dbfs_dest_path_base, dbfs_file_name)
 
-            # Guardar archivos en local para pruebas
-            #TODO Eliminar
-            with open(f"src/{dbfs_file_name}", "w", encoding="utf-8") as f:
-                json.dump(nuevo_registro, f, indent=4, ensure_ascii=False)
-
             # Subir datos a DBFS
-            # subir_datos(nuevo_registro, dbfs_full_path)
+            subir_datos(nuevo_registro, dbfs_full_path)
             
             # Espera antes de la siguiente iteración
             time.sleep(upload_interval_seconds)
