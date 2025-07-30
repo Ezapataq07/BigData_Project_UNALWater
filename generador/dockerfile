@@ -31,7 +31,9 @@ RUN pip install --no-cache-dir --upgrade pip && \
     "pyspark==${SPARK_VERSION}" \
     -r requirements.txt
 
-COPY . .
+COPY src/ ./src
+COPY config/ ./config
+COPY data/ ./data
 
 # Exponer los puertos
 EXPOSE 4040

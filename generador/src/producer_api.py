@@ -221,8 +221,8 @@ if __name__ == "__main__":
             subir_datos(nuevo_registro, dbfs_full_path)
             
             # Espera antes de la siguiente iteración
-            time.sleep(upload_interval_seconds)
             logging.info(f"\nPróxima ejecución en {upload_interval_seconds} segundos...")
+            time.sleep(upload_interval_seconds)
             
     except KeyboardInterrupt:
         logging.info("\nGenerador detenido por el usuario.")
