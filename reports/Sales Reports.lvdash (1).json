@@ -1,0 +1,3039 @@
+{
+  "datasets": [
+    {
+      "name": "79a8b437",
+      "displayName": "gld_sales",
+      "queryLines": [
+        "SELECT * FROM gld_sales"
+      ],
+      "catalog": "adb_big_data_unal_water",
+      "schema": "gold"
+    },
+    {
+      "name": "6ade5991",
+      "displayName": "gld_best_customers",
+      "queryLines": [
+        "SELECT * FROM vw_gld_best_customers"
+      ],
+      "catalog": "adb_big_data_unal_water",
+      "schema": "gold"
+    },
+    {
+      "name": "0b8ef687",
+      "displayName": "gld_best_employees",
+      "queryLines": [
+        "SELECT * FROM vw_gld_best_employees"
+      ],
+      "catalog": "adb_big_data_unal_water",
+      "schema": "gold"
+    },
+    {
+      "name": "d8d1569c",
+      "displayName": "gld_customers_districts",
+      "queryLines": [
+        "SELECT * FROM vw_gld_customers_districts"
+      ],
+      "catalog": "adb_big_data_unal_water",
+      "schema": "gold"
+    },
+    {
+      "name": "74c32204",
+      "displayName": "gld_sales_districts",
+      "queryLines": [
+        "SELECT * FROM vw_gld_sales_districts"
+      ],
+      "catalog": "adb_big_data_unal_water",
+      "schema": "gold"
+    },
+    {
+      "name": "5071c64c",
+      "displayName": "gld_sales_employees",
+      "queryLines": [
+        "SELECT * FROM vw_gld_sales_employees"
+      ],
+      "catalog": "adb_big_data_unal_water",
+      "schema": "gold"
+    },
+    {
+      "name": "008e693a",
+      "displayName": "demand_forecast",
+      "queryLines": [
+        "SELECT * FROM adb_big_data_unal_water.gold.demand_forecast"
+      ]
+    },
+    {
+      "name": "cd775e5e",
+      "displayName": "last_demand_forecast",
+      "queryLines": [
+        "SELECT * FROM adb_big_data_unal_water.gold.demand_forecast WHERE event_datetime = (SELECT MAX(event_datetime) FROM adb_big_data_unal_water.gold.demand_forecast)"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "1ce424c9",
+      "displayName": "Date's sales",
+      "layout": [
+        {
+          "widget": {
+            "name": "47f20304",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "79a8b437",
+                  "fields": [
+                    {
+                      "name": "district",
+                      "expression": "`district`"
+                    },
+                    {
+                      "name": "latitude",
+                      "expression": "`latitude`"
+                    },
+                    {
+                      "name": "longitude",
+                      "expression": "`longitude`"
+                    },
+                    {
+                      "name": "quantity_products",
+                      "expression": "`quantity_products`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "symbol-map",
+              "encodings": {
+                "coordinates": {
+                  "latitude": {
+                    "fieldName": "latitude",
+                    "displayName": "latitude"
+                  },
+                  "longitude": {
+                    "fieldName": "longitude",
+                    "displayName": "longitude"
+                  }
+                },
+                "color": {
+                  "fieldName": "district",
+                  "scale": {
+                    "type": "categorical"
+                  },
+                  "displayName": "district"
+                },
+                "extra": [
+                  {
+                    "fieldName": "quantity_products",
+                    "displayName": "quantity_products"
+                  }
+                ]
+              },
+              "frame": {
+                "showDescription": false,
+                "title": "Total quantity products per district",
+                "showTitle": true,
+                "headerAlignment": "center"
+              },
+              "mark": {
+                "size": -1.7
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 2,
+            "width": 3,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "b54fd766",
+            "queries": [
+              {
+                "name": "dashboards/01f06714f1ea1ff8b880dddb959b6ab6/datasets/01f067157e1c11a5bf1c4388b958810f_event_date",
+                "query": {
+                  "datasetName": "79a8b437",
+                  "fields": [
+                    {
+                      "name": "event_date",
+                      "expression": "`event_date`"
+                    },
+                    {
+                      "name": "event_date_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "dashboards/01f06714f1ea1ff8b880dddb959b6ab6/datasets/01f06715aa3c198ea8fda8e377f2f47c_event_date",
+                "query": {
+                  "datasetName": "74c32204",
+                  "fields": [
+                    {
+                      "name": "event_date",
+                      "expression": "`event_date`"
+                    },
+                    {
+                      "name": "event_date_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-date-picker",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "event_date",
+                    "displayName": "event_date",
+                    "queryName": "dashboards/01f06714f1ea1ff8b880dddb959b6ab6/datasets/01f067157e1c11a5bf1c4388b958810f_event_date"
+                  },
+                  {
+                    "fieldName": "event_date",
+                    "displayName": "event_date",
+                    "queryName": "dashboards/01f06714f1ea1ff8b880dddb959b6ab6/datasets/01f06715aa3c198ea8fda8e377f2f47c_event_date"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Date"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 0,
+            "width": 2,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "22cf4fb8",
+            "queries": [
+              {
+                "name": "dashboards/01f06714f1ea1ff8b880dddb959b6ab6/datasets/01f067157e1c11a5bf1c4388b958810f_district",
+                "query": {
+                  "datasetName": "79a8b437",
+                  "fields": [
+                    {
+                      "name": "district",
+                      "expression": "`district`"
+                    },
+                    {
+                      "name": "district_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "dashboards/01f06714f1ea1ff8b880dddb959b6ab6/datasets/01f06715aa3c198ea8fda8e377f2f47c_district",
+                "query": {
+                  "datasetName": "74c32204",
+                  "fields": [
+                    {
+                      "name": "district",
+                      "expression": "`district`"
+                    },
+                    {
+                      "name": "district_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "district",
+                    "displayName": "district",
+                    "queryName": "dashboards/01f06714f1ea1ff8b880dddb959b6ab6/datasets/01f067157e1c11a5bf1c4388b958810f_district"
+                  },
+                  {
+                    "fieldName": "district",
+                    "displayName": "district",
+                    "queryName": "dashboards/01f06714f1ea1ff8b880dddb959b6ab6/datasets/01f06715aa3c198ea8fda8e377f2f47c_district"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Districts"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 1,
+            "width": 2,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "34ab9685",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "74c32204",
+                  "fields": [
+                    {
+                      "name": "sum(total_sales_per_day)",
+                      "expression": "SUM(`total_sales_per_day`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(total_sales_per_day)",
+                  "displayName": "Sum of total_sales_per_day"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Total sales",
+                "headerAlignment": "center"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "9fd49967",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# Total Date's Quantity Products Sold per District"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "37223908",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "74c32204",
+                  "fields": [
+                    {
+                      "name": "sum(total_products_sold_per_day)",
+                      "expression": "SUM(`total_products_sold_per_day`)"
+                    },
+                    {
+                      "name": "district",
+                      "expression": "`district`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "sum(total_products_sold_per_day)",
+                  "scale": {
+                    "type": "quantitative",
+                    "reverse": true
+                  },
+                  "axis": {
+                    "labelAngle": 0,
+                    "hideLabels": true
+                  },
+                  "displayName": "Total quantity products sold"
+                },
+                "y": {
+                  "fieldName": "district",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "x-reversed"
+                    }
+                  },
+                  "displayName": "District"
+                },
+                "label": {
+                  "show": true
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 3,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "6b08258b",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "74c32204",
+                  "fields": [
+                    {
+                      "name": "sum(total_products_sold_per_day)",
+                      "expression": "SUM(`total_products_sold_per_day`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(total_products_sold_per_day)",
+                  "displayName": "Sum of total_products_sold_per_day"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Total quantity products sold",
+                "headerAlignment": "center"
+              }
+            }
+          },
+          "position": {
+            "x": 2,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "d4d26949",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "79a8b437",
+                  "fields": [
+                    {
+                      "name": "event_date",
+                      "expression": "`event_date`"
+                    },
+                    {
+                      "name": "order_id",
+                      "expression": "`order_id`"
+                    },
+                    {
+                      "name": "district",
+                      "expression": "`district`"
+                    },
+                    {
+                      "name": "quantity_products",
+                      "expression": "`quantity_products`"
+                    },
+                    {
+                      "name": "employee",
+                      "expression": "`employee`"
+                    },
+                    {
+                      "name": "customer",
+                      "expression": "`customer`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "event_date",
+                    "dateTimeFormat": "YYYY-MM-DD",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "date",
+                    "displayAs": "datetime",
+                    "visible": true,
+                    "order": 0,
+                    "title": "Date",
+                    "allowSearch": false,
+                    "alignContent": "right",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false,
+                    "displayName": "event_date"
+                  },
+                  {
+                    "fieldName": "order_id",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 1,
+                    "title": "Id",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false,
+                    "displayName": "order_id"
+                  },
+                  {
+                    "fieldName": "district",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 4,
+                    "title": "District",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false,
+                    "displayName": "district"
+                  },
+                  {
+                    "fieldName": "quantity_products",
+                    "numberFormat": "0",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "integer",
+                    "displayAs": "number",
+                    "visible": true,
+                    "order": 5,
+                    "title": "Quantity Products",
+                    "allowSearch": false,
+                    "alignContent": "right",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false,
+                    "displayName": "quantity_products"
+                  },
+                  {
+                    "fieldName": "employee",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 6,
+                    "title": "Employee",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false,
+                    "displayName": "employee"
+                  },
+                  {
+                    "fieldName": "customer",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 7,
+                    "title": "Customer",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false,
+                    "displayName": "customer"
+                  }
+                ]
+              },
+              "invisibleColumns": [
+                {
+                  "numberFormat": "0.00",
+                  "booleanValues": [
+                    "false",
+                    "true"
+                  ],
+                  "imageUrlTemplate": "{{ @ }}",
+                  "imageTitleTemplate": "{{ @ }}",
+                  "imageWidth": "",
+                  "imageHeight": "",
+                  "linkUrlTemplate": "{{ @ }}",
+                  "linkTextTemplate": "{{ @ }}",
+                  "linkTitleTemplate": "{{ @ }}",
+                  "linkOpenInNewTab": true,
+                  "name": "latitude",
+                  "type": "float",
+                  "displayAs": "number",
+                  "order": 2,
+                  "title": "latitude",
+                  "allowSearch": false,
+                  "alignContent": "right",
+                  "allowHTML": false,
+                  "highlightLinks": false,
+                  "useMonospaceFont": false,
+                  "preserveWhitespace": false
+                },
+                {
+                  "numberFormat": "0.00",
+                  "booleanValues": [
+                    "false",
+                    "true"
+                  ],
+                  "imageUrlTemplate": "{{ @ }}",
+                  "imageTitleTemplate": "{{ @ }}",
+                  "imageWidth": "",
+                  "imageHeight": "",
+                  "linkUrlTemplate": "{{ @ }}",
+                  "linkTextTemplate": "{{ @ }}",
+                  "linkTitleTemplate": "{{ @ }}",
+                  "linkOpenInNewTab": true,
+                  "name": "longitude",
+                  "type": "float",
+                  "displayAs": "number",
+                  "order": 3,
+                  "title": "longitude",
+                  "allowSearch": false,
+                  "alignContent": "right",
+                  "allowHTML": false,
+                  "highlightLinks": false,
+                  "useMonospaceFont": false,
+                  "preserveWhitespace": false
+                },
+                {
+                  "booleanValues": [
+                    "false",
+                    "true"
+                  ],
+                  "imageUrlTemplate": "{{ @ }}",
+                  "imageTitleTemplate": "{{ @ }}",
+                  "imageWidth": "",
+                  "imageHeight": "",
+                  "linkUrlTemplate": "{{ @ }}",
+                  "linkTextTemplate": "{{ @ }}",
+                  "linkTitleTemplate": "{{ @ }}",
+                  "linkOpenInNewTab": true,
+                  "name": "partition_date",
+                  "type": "string",
+                  "displayAs": "string",
+                  "order": 8,
+                  "title": "partition_date",
+                  "allowSearch": false,
+                  "alignContent": "left",
+                  "allowHTML": false,
+                  "highlightLinks": false,
+                  "useMonospaceFont": false,
+                  "preserveWhitespace": false
+                },
+                {
+                  "numberFormat": "0",
+                  "booleanValues": [
+                    "false",
+                    "true"
+                  ],
+                  "imageUrlTemplate": "{{ @ }}",
+                  "imageTitleTemplate": "{{ @ }}",
+                  "imageWidth": "",
+                  "imageHeight": "",
+                  "linkUrlTemplate": "{{ @ }}",
+                  "linkTextTemplate": "{{ @ }}",
+                  "linkTitleTemplate": "{{ @ }}",
+                  "linkOpenInNewTab": true,
+                  "name": "event_day",
+                  "type": "integer",
+                  "displayAs": "number",
+                  "order": 9,
+                  "title": "event_day",
+                  "allowSearch": false,
+                  "alignContent": "right",
+                  "allowHTML": false,
+                  "highlightLinks": false,
+                  "useMonospaceFont": false,
+                  "preserveWhitespace": false
+                },
+                {
+                  "numberFormat": "0",
+                  "booleanValues": [
+                    "false",
+                    "true"
+                  ],
+                  "imageUrlTemplate": "{{ @ }}",
+                  "imageTitleTemplate": "{{ @ }}",
+                  "imageWidth": "",
+                  "imageHeight": "",
+                  "linkUrlTemplate": "{{ @ }}",
+                  "linkTextTemplate": "{{ @ }}",
+                  "linkTitleTemplate": "{{ @ }}",
+                  "linkOpenInNewTab": true,
+                  "name": "event_month",
+                  "type": "integer",
+                  "displayAs": "number",
+                  "order": 10,
+                  "title": "event_month",
+                  "allowSearch": false,
+                  "alignContent": "right",
+                  "allowHTML": false,
+                  "highlightLinks": false,
+                  "useMonospaceFont": false,
+                  "preserveWhitespace": false
+                },
+                {
+                  "numberFormat": "0",
+                  "booleanValues": [
+                    "false",
+                    "true"
+                  ],
+                  "imageUrlTemplate": "{{ @ }}",
+                  "imageTitleTemplate": "{{ @ }}",
+                  "imageWidth": "",
+                  "imageHeight": "",
+                  "linkUrlTemplate": "{{ @ }}",
+                  "linkTextTemplate": "{{ @ }}",
+                  "linkTitleTemplate": "{{ @ }}",
+                  "linkOpenInNewTab": true,
+                  "name": "event_year",
+                  "type": "integer",
+                  "displayAs": "number",
+                  "order": 11,
+                  "title": "event_year",
+                  "allowSearch": false,
+                  "alignContent": "right",
+                  "allowHTML": false,
+                  "highlightLinks": false,
+                  "useMonospaceFont": false,
+                  "preserveWhitespace": false
+                }
+              ],
+              "allowHTMLByDefault": false,
+              "itemsPerPage": 25,
+              "paginationSize": "default",
+              "condensed": true,
+              "withRowNumber": false
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 11,
+            "width": 6,
+            "height": 5
+          }
+        },
+        {
+          "widget": {
+            "name": "b518d2f7",
+            "queries": [
+              {
+                "name": "dashboards/01f06714f1ea1ff8b880dddb959b6ab6/datasets/01f067157e1c11a5bf1c4388b958810f_employee",
+                "query": {
+                  "datasetName": "79a8b437",
+                  "fields": [
+                    {
+                      "name": "employee",
+                      "expression": "`employee`"
+                    },
+                    {
+                      "name": "employee_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "employee",
+                    "displayName": "employee",
+                    "queryName": "dashboards/01f06714f1ea1ff8b880dddb959b6ab6/datasets/01f067157e1c11a5bf1c4388b958810f_employee"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Employee"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 10,
+            "width": 3,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "18f7791a",
+            "queries": [
+              {
+                "name": "dashboards/01f06714f1ea1ff8b880dddb959b6ab6/datasets/01f067157e1c11a5bf1c4388b958810f_customer",
+                "query": {
+                  "datasetName": "79a8b437",
+                  "fields": [
+                    {
+                      "name": "customer",
+                      "expression": "`customer`"
+                    },
+                    {
+                      "name": "customer_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "customer",
+                    "displayName": "customer",
+                    "queryName": "dashboards/01f06714f1ea1ff8b880dddb959b6ab6/datasets/01f067157e1c11a5bf1c4388b958810f_customer"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Customer"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 10,
+            "width": 3,
+            "height": 1
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "3403cbea",
+      "displayName": "Employee's sales",
+      "layout": [
+        {
+          "widget": {
+            "name": "02917ef6",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# Total Employees's Sales "
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "fa7b8170",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5071c64c",
+                  "fields": [
+                    {
+                      "name": "event_date",
+                      "expression": "`event_date`"
+                    },
+                    {
+                      "name": "employee",
+                      "expression": "`employee`"
+                    },
+                    {
+                      "name": "total_sales_per_day",
+                      "expression": "`total_sales_per_day`"
+                    },
+                    {
+                      "name": "total_products_sold_per_day",
+                      "expression": "`total_products_sold_per_day`"
+                    },
+                    {
+                      "name": "employee_effectiveness",
+                      "expression": "`employee_effectiveness`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "event_date",
+                    "dateTimeFormat": "DD/MM/YYYY",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "date",
+                    "displayAs": "datetime",
+                    "visible": true,
+                    "order": 0,
+                    "title": "Date",
+                    "allowSearch": false,
+                    "alignContent": "right",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false,
+                    "displayName": "event_date"
+                  },
+                  {
+                    "fieldName": "employee",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 1,
+                    "title": "Employee",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false,
+                    "displayName": "employee"
+                  },
+                  {
+                    "fieldName": "total_sales_per_day",
+                    "numberFormat": "0",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "integer",
+                    "displayAs": "number",
+                    "visible": true,
+                    "order": 3,
+                    "title": "Sales",
+                    "allowSearch": false,
+                    "alignContent": "right",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false,
+                    "displayName": "total_sales_per_day"
+                  },
+                  {
+                    "fieldName": "total_products_sold_per_day",
+                    "numberFormat": "0",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "integer",
+                    "displayAs": "number",
+                    "visible": true,
+                    "order": 6,
+                    "title": "Sold Products",
+                    "allowSearch": false,
+                    "alignContent": "right",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false,
+                    "displayName": "total_products_sold_per_day"
+                  },
+                  {
+                    "fieldName": "employee_effectiveness",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "decimal",
+                    "displayAs": "number",
+                    "visible": true,
+                    "order": 8,
+                    "title": "Employees Effectiveness",
+                    "allowSearch": false,
+                    "alignContent": "right",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false,
+                    "displayName": "employee_effectiveness"
+                  }
+                ]
+              },
+              "invisibleColumns": [
+                {
+                  "numberFormat": "0",
+                  "booleanValues": [
+                    "false",
+                    "true"
+                  ],
+                  "imageUrlTemplate": "{{ @ }}",
+                  "imageTitleTemplate": "{{ @ }}",
+                  "imageWidth": "",
+                  "imageHeight": "",
+                  "linkUrlTemplate": "{{ @ }}",
+                  "linkTextTemplate": "{{ @ }}",
+                  "linkTitleTemplate": "{{ @ }}",
+                  "linkOpenInNewTab": true,
+                  "name": "effectiveness_rank",
+                  "type": "integer",
+                  "displayAs": "number",
+                  "order": 2,
+                  "title": "effectiveness_rank",
+                  "allowSearch": false,
+                  "alignContent": "right",
+                  "allowHTML": false,
+                  "highlightLinks": false,
+                  "useMonospaceFont": false,
+                  "preserveWhitespace": false
+                },
+                {
+                  "booleanValues": [
+                    "false",
+                    "true"
+                  ],
+                  "imageUrlTemplate": "{{ @ }}",
+                  "imageTitleTemplate": "{{ @ }}",
+                  "imageWidth": "",
+                  "imageHeight": "",
+                  "linkUrlTemplate": "{{ @ }}",
+                  "linkTextTemplate": "{{ @ }}",
+                  "linkTitleTemplate": "{{ @ }}",
+                  "linkOpenInNewTab": true,
+                  "name": "percent_total_sales_per_day",
+                  "type": "decimal",
+                  "displayAs": "number",
+                  "order": 4,
+                  "title": "Sales Percentage [%]",
+                  "allowSearch": false,
+                  "alignContent": "right",
+                  "allowHTML": false,
+                  "highlightLinks": false,
+                  "useMonospaceFont": false,
+                  "preserveWhitespace": false
+                },
+                {
+                  "numberFormat": "0",
+                  "booleanValues": [
+                    "false",
+                    "true"
+                  ],
+                  "imageUrlTemplate": "{{ @ }}",
+                  "imageTitleTemplate": "{{ @ }}",
+                  "imageWidth": "",
+                  "imageHeight": "",
+                  "linkUrlTemplate": "{{ @ }}",
+                  "linkTextTemplate": "{{ @ }}",
+                  "linkTitleTemplate": "{{ @ }}",
+                  "linkOpenInNewTab": true,
+                  "name": "sales_rank",
+                  "type": "integer",
+                  "displayAs": "number",
+                  "order": 5,
+                  "title": "sales_rank",
+                  "allowSearch": false,
+                  "alignContent": "right",
+                  "allowHTML": false,
+                  "highlightLinks": false,
+                  "useMonospaceFont": false,
+                  "preserveWhitespace": false
+                },
+                {
+                  "booleanValues": [
+                    "false",
+                    "true"
+                  ],
+                  "imageUrlTemplate": "{{ @ }}",
+                  "imageTitleTemplate": "{{ @ }}",
+                  "imageWidth": "",
+                  "imageHeight": "",
+                  "linkUrlTemplate": "{{ @ }}",
+                  "linkTextTemplate": "{{ @ }}",
+                  "linkTitleTemplate": "{{ @ }}",
+                  "linkOpenInNewTab": true,
+                  "name": "percent_products_sold_per_day",
+                  "type": "decimal",
+                  "displayAs": "number",
+                  "order": 7,
+                  "title": "Products Sold Percentage [%]",
+                  "allowSearch": false,
+                  "alignContent": "right",
+                  "allowHTML": false,
+                  "highlightLinks": false,
+                  "useMonospaceFont": false,
+                  "preserveWhitespace": false
+                }
+              ],
+              "allowHTMLByDefault": false,
+              "itemsPerPage": 25,
+              "paginationSize": "default",
+              "condensed": true,
+              "withRowNumber": false
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 2,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "50137b6f",
+            "queries": [
+              {
+                "name": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f06be91dca17cab4f5f565e985710b_event_date",
+                "query": {
+                  "datasetName": "5071c64c",
+                  "fields": [
+                    {
+                      "name": "event_date",
+                      "expression": "`event_date`"
+                    },
+                    {
+                      "name": "event_date_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-date-range-picker",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "event_date",
+                    "displayName": "event_date",
+                    "queryName": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f06be91dca17cab4f5f565e985710b_event_date"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Date"
+              }
+            }
+          },
+          "position": {
+            "x": 2,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "51e55341",
+            "queries": [
+              {
+                "name": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b821a588abf5e8d964c7e5d_employee",
+                "query": {
+                  "datasetName": "5071c64c",
+                  "fields": [
+                    {
+                      "name": "employee",
+                      "expression": "`employee`"
+                    },
+                    {
+                      "name": "employee_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "employee",
+                    "displayName": "employee",
+                    "queryName": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b821a588abf5e8d964c7e5d_employee"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Employee"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 0,
+            "width": 3,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "ea92ad21",
+            "queries": [
+              {
+                "name": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b821a588abf5e8d964c7e5d_effectiveness_rank",
+                "query": {
+                  "datasetName": "5071c64c",
+                  "fields": [
+                    {
+                      "name": "effectiveness_rank",
+                      "expression": "`effectiveness_rank`"
+                    },
+                    {
+                      "name": "effectiveness_rank_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "effectiveness_rank",
+                    "displayName": "effectiveness_rank",
+                    "queryName": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b821a588abf5e8d964c7e5d_effectiveness_rank"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Effectiveness Rank"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 1,
+            "width": 2,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "ba1040b1",
+            "queries": [
+              {
+                "name": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b821a588abf5e8d964c7e5d_sales_rank",
+                "query": {
+                  "datasetName": "5071c64c",
+                  "fields": [
+                    {
+                      "name": "sales_rank",
+                      "expression": "`sales_rank`"
+                    },
+                    {
+                      "name": "sales_rank_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "sales_rank",
+                    "displayName": "sales_rank",
+                    "queryName": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b821a588abf5e8d964c7e5d_sales_rank"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Sales Rank"
+              }
+            }
+          },
+          "position": {
+            "x": 2,
+            "y": 1,
+            "width": 2,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "471089bb",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5071c64c",
+                  "fields": [
+                    {
+                      "name": "daily(event_date)",
+                      "expression": "DATE_TRUNC(\"DAY\", `event_date`)"
+                    },
+                    {
+                      "name": "sum(total_products_sold_per_day)",
+                      "expression": "SUM(`total_products_sold_per_day`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "daily(event_date)",
+                  "scale": {
+                    "type": "temporal"
+                  },
+                  "displayName": "Date"
+                },
+                "y": {
+                  "fieldName": "sum(total_products_sold_per_day)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "axis": {
+                    "hideTitle": false,
+                    "hideLabels": false
+                  },
+                  "displayName": "Sold Products"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Daily Sold Products"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "67ae009a",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "0b8ef687",
+                  "fields": [
+                    {
+                      "name": "sum(total_products_sold)",
+                      "expression": "SUM(`total_products_sold`)"
+                    },
+                    {
+                      "name": "employee",
+                      "expression": "`employee`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "sum(total_products_sold)",
+                  "scale": {
+                    "type": "quantitative",
+                    "reverse": false
+                  },
+                  "axis": {
+                    "hideLabels": true
+                  },
+                  "displayName": "Sold Products"
+                },
+                "y": {
+                  "fieldName": "employee",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "x-reversed"
+                    }
+                  },
+                  "axis": {
+                    "hideLabels": false,
+                    "hideTitle": false
+                  },
+                  "displayName": "Employee"
+                },
+                "label": {
+                  "show": true
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Sold Products by Employee"
+              }
+            }
+          },
+          "position": {
+            "x": 2,
+            "y": 9,
+            "width": 2,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "58495a0a",
+            "queries": [
+              {
+                "name": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b821a13be088170437c87be_event_month",
+                "query": {
+                  "datasetName": "0b8ef687",
+                  "fields": [
+                    {
+                      "name": "event_month",
+                      "expression": "`event_month`"
+                    },
+                    {
+                      "name": "event_month_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "event_month",
+                    "displayName": "event_month",
+                    "queryName": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b821a13be088170437c87be_event_month"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Month"
+              },
+              "selection": {
+                "defaultSelection": {
+                  "values": {
+                    "dataType": "INTEGER",
+                    "values": [
+                      {
+                        "value": "7"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 1,
+            "y": 8,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "3690a462",
+            "queries": [
+              {
+                "name": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b821a13be088170437c87be_event_year",
+                "query": {
+                  "datasetName": "0b8ef687",
+                  "fields": [
+                    {
+                      "name": "event_year",
+                      "expression": "`event_year`"
+                    },
+                    {
+                      "name": "event_year_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "event_year",
+                    "displayName": "event_year",
+                    "queryName": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b821a13be088170437c87be_event_year"
+                  }
+                ]
+              },
+              "selection": {
+                "defaultSelection": {
+                  "values": {
+                    "dataType": "INTEGER",
+                    "values": [
+                      {
+                        "value": "2025"
+                      }
+                    ]
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Year"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 8,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "f98377d5",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "0b8ef687",
+                  "fields": [
+                    {
+                      "name": "sum(difference_in_products_sold_from_last_month)",
+                      "expression": "SUM(`difference_in_products_sold_from_last_month`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(difference_in_products_sold_from_last_month)",
+                  "displayName": "Sum of difference_in_products_sold_from_last_month"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Difference from Last Month"
+              }
+            }
+          },
+          "position": {
+            "x": 1,
+            "y": 9,
+            "width": 1,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "faaedc53",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "0b8ef687",
+                  "fields": [
+                    {
+                      "name": "sum(total_products_sold)",
+                      "expression": "SUM(`total_products_sold`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(total_products_sold)",
+                  "displayName": "Sum of total_products_sold"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Sold Products this Month"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 9,
+            "width": 1,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "80794328",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "0b8ef687",
+                  "fields": [
+                    {
+                      "name": "sum(difference_in_products_sold_from_last_month)",
+                      "expression": "SUM(`difference_in_products_sold_from_last_month`)"
+                    },
+                    {
+                      "name": "employee",
+                      "expression": "`employee`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "sum(difference_in_products_sold_from_last_month)",
+                  "scale": {
+                    "type": "quantitative",
+                    "reverse": false
+                  },
+                  "axis": {
+                    "hideLabels": true
+                  },
+                  "displayName": "Sold Products"
+                },
+                "y": {
+                  "fieldName": "employee",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "x-reversed"
+                    }
+                  },
+                  "displayName": "Employee"
+                },
+                "label": {
+                  "show": true
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Difference in Sold Products from Last Month"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 9,
+            "width": 2,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "fb40dda6",
+            "queries": [
+              {
+                "name": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b821a13be088170437c87be_employee",
+                "query": {
+                  "datasetName": "0b8ef687",
+                  "fields": [
+                    {
+                      "name": "employee",
+                      "expression": "`employee`"
+                    },
+                    {
+                      "name": "employee_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "employee",
+                    "displayName": "employee",
+                    "queryName": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b821a13be088170437c87be_employee"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Employee"
+              }
+            }
+          },
+          "position": {
+            "x": 2,
+            "y": 8,
+            "width": 4,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "8cbdf0aa",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "0b8ef687",
+                  "fields": [
+                    {
+                      "name": "employee",
+                      "expression": "`employee`"
+                    },
+                    {
+                      "name": "best_employee_rank",
+                      "expression": "`best_employee_rank`"
+                    },
+                    {
+                      "name": "percent_total_products_sold",
+                      "expression": "`percent_total_products_sold`"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`best_employee_rank` IN (1, 3, 2)"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "employee",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100002,
+                    "title": "Employee",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false,
+                    "displayName": "employee"
+                  },
+                  {
+                    "fieldName": "best_employee_rank",
+                    "numberFormat": "0",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "integer",
+                    "displayAs": "number",
+                    "visible": true,
+                    "order": 100004,
+                    "title": "Rank",
+                    "allowSearch": false,
+                    "alignContent": "right",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false,
+                    "displayName": "best_employee_rank"
+                  },
+                  {
+                    "fieldName": "percent_total_products_sold",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "decimal",
+                    "displayAs": "number",
+                    "visible": true,
+                    "order": 100005,
+                    "title": "Sold Percentage [%]",
+                    "allowSearch": false,
+                    "alignContent": "right",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false,
+                    "displayName": "percent_total_products_sold"
+                  }
+                ]
+              },
+              "invisibleColumns": [
+                {
+                  "numberFormat": "0",
+                  "booleanValues": [
+                    "false",
+                    "true"
+                  ],
+                  "imageUrlTemplate": "{{ @ }}",
+                  "imageTitleTemplate": "{{ @ }}",
+                  "imageWidth": "",
+                  "imageHeight": "",
+                  "linkUrlTemplate": "{{ @ }}",
+                  "linkTextTemplate": "{{ @ }}",
+                  "linkTitleTemplate": "{{ @ }}",
+                  "linkOpenInNewTab": true,
+                  "name": "event_year",
+                  "type": "integer",
+                  "displayAs": "number",
+                  "order": 100000,
+                  "title": "event_year",
+                  "allowSearch": false,
+                  "alignContent": "right",
+                  "allowHTML": false,
+                  "highlightLinks": false,
+                  "useMonospaceFont": false,
+                  "preserveWhitespace": false
+                },
+                {
+                  "numberFormat": "0",
+                  "booleanValues": [
+                    "false",
+                    "true"
+                  ],
+                  "imageUrlTemplate": "{{ @ }}",
+                  "imageTitleTemplate": "{{ @ }}",
+                  "imageWidth": "",
+                  "imageHeight": "",
+                  "linkUrlTemplate": "{{ @ }}",
+                  "linkTextTemplate": "{{ @ }}",
+                  "linkTitleTemplate": "{{ @ }}",
+                  "linkOpenInNewTab": true,
+                  "name": "event_month",
+                  "type": "integer",
+                  "displayAs": "number",
+                  "order": 100001,
+                  "title": "event_month",
+                  "allowSearch": false,
+                  "alignContent": "right",
+                  "allowHTML": false,
+                  "highlightLinks": false,
+                  "useMonospaceFont": false,
+                  "preserveWhitespace": false
+                },
+                {
+                  "numberFormat": "0",
+                  "booleanValues": [
+                    "false",
+                    "true"
+                  ],
+                  "imageUrlTemplate": "{{ @ }}",
+                  "imageTitleTemplate": "{{ @ }}",
+                  "imageWidth": "",
+                  "imageHeight": "",
+                  "linkUrlTemplate": "{{ @ }}",
+                  "linkTextTemplate": "{{ @ }}",
+                  "linkTitleTemplate": "{{ @ }}",
+                  "linkOpenInNewTab": true,
+                  "name": "total_products_sold",
+                  "type": "integer",
+                  "displayAs": "number",
+                  "order": 100003,
+                  "title": "total_products_sold",
+                  "allowSearch": false,
+                  "alignContent": "right",
+                  "allowHTML": false,
+                  "highlightLinks": false,
+                  "useMonospaceFont": false,
+                  "preserveWhitespace": false
+                },
+                {
+                  "numberFormat": "0",
+                  "booleanValues": [
+                    "false",
+                    "true"
+                  ],
+                  "imageUrlTemplate": "{{ @ }}",
+                  "imageTitleTemplate": "{{ @ }}",
+                  "imageWidth": "",
+                  "imageHeight": "",
+                  "linkUrlTemplate": "{{ @ }}",
+                  "linkTextTemplate": "{{ @ }}",
+                  "linkTitleTemplate": "{{ @ }}",
+                  "linkOpenInNewTab": true,
+                  "name": "difference_in_products_sold_from_last_month",
+                  "type": "integer",
+                  "displayAs": "number",
+                  "order": 100006,
+                  "title": "difference_in_products_sold_from_last_month",
+                  "allowSearch": false,
+                  "alignContent": "right",
+                  "allowHTML": false,
+                  "highlightLinks": false,
+                  "useMonospaceFont": false,
+                  "preserveWhitespace": false
+                }
+              ],
+              "allowHTMLByDefault": false,
+              "itemsPerPage": 25,
+              "paginationSize": "default",
+              "condensed": true,
+              "withRowNumber": false,
+              "frame": {
+                "showTitle": true,
+                "title": "Employees Rank"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 12,
+            "width": 2,
+            "height": 3
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "d0bb4d23",
+      "displayName": "Customers",
+      "layout": [
+        {
+          "widget": {
+            "name": "8f314039",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# Customers per District"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "294a567b",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "d8d1569c",
+                  "fields": [
+                    {
+                      "name": "sum(total_customers_per_district)",
+                      "expression": "SUM(`total_customers_per_district`)"
+                    },
+                    {
+                      "name": "sum(total_employees_per_district)",
+                      "expression": "SUM(`total_employees_per_district`)"
+                    },
+                    {
+                      "name": "district",
+                      "expression": "`district`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "scale": {
+                    "type": "quantitative",
+                    "reverse": false
+                  },
+                  "fields": [
+                    {
+                      "fieldName": "sum(total_customers_per_district)",
+                      "displayName": "Customers"
+                    },
+                    {
+                      "fieldName": "sum(total_employees_per_district)",
+                      "displayName": "Employees"
+                    }
+                  ],
+                  "axis": {
+                    "hideTitle": false,
+                    "hideLabels": false
+                  }
+                },
+                "y": {
+                  "fieldName": "district",
+                  "scale": {
+                    "type": "categorical"
+                  },
+                  "displayName": "Districts"
+                },
+                "label": {
+                  "show": false
+                }
+              },
+              "mark": {
+                "layout": "percent-stack"
+              }
+            }
+          },
+          "position": {
+            "x": 2,
+            "y": 1,
+            "width": 4,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "b1952c86",
+            "queries": [
+              {
+                "name": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b821a2aab402646abaa6b66_event_year",
+                "query": {
+                  "datasetName": "d8d1569c",
+                  "fields": [
+                    {
+                      "name": "event_year",
+                      "expression": "`event_year`"
+                    },
+                    {
+                      "name": "event_year_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b8219f699d9c8a3a1204279_event_year",
+                "query": {
+                  "datasetName": "6ade5991",
+                  "fields": [
+                    {
+                      "name": "event_year",
+                      "expression": "`event_year`"
+                    },
+                    {
+                      "name": "event_year_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "event_year",
+                    "displayName": "event_year",
+                    "queryName": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b821a2aab402646abaa6b66_event_year"
+                  },
+                  {
+                    "fieldName": "event_year",
+                    "displayName": "event_year",
+                    "queryName": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b8219f699d9c8a3a1204279_event_year"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Year"
+              },
+              "selection": {
+                "defaultSelection": {
+                  "values": {
+                    "dataType": "INTEGER",
+                    "values": [
+                      {
+                        "value": "2025"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 2,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "dd58b2d2",
+            "queries": [
+              {
+                "name": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b821a2aab402646abaa6b66_event_month",
+                "query": {
+                  "datasetName": "d8d1569c",
+                  "fields": [
+                    {
+                      "name": "event_month",
+                      "expression": "`event_month`"
+                    },
+                    {
+                      "name": "event_month_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b8219f699d9c8a3a1204279_event_month",
+                "query": {
+                  "datasetName": "6ade5991",
+                  "fields": [
+                    {
+                      "name": "event_month",
+                      "expression": "`event_month`"
+                    },
+                    {
+                      "name": "event_month_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "event_month",
+                    "displayName": "event_month",
+                    "queryName": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b821a2aab402646abaa6b66_event_month"
+                  },
+                  {
+                    "fieldName": "event_month",
+                    "displayName": "event_month",
+                    "queryName": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b8219f699d9c8a3a1204279_event_month"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Month"
+              },
+              "selection": {
+                "defaultSelection": {
+                  "values": {
+                    "dataType": "INTEGER",
+                    "values": [
+                      {
+                        "value": "7"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "64ce4515",
+            "queries": [
+              {
+                "name": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b821a2aab402646abaa6b66_district",
+                "query": {
+                  "datasetName": "d8d1569c",
+                  "fields": [
+                    {
+                      "name": "district",
+                      "expression": "`district`"
+                    },
+                    {
+                      "name": "district_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "district",
+                    "displayName": "district",
+                    "queryName": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b821a2aab402646abaa6b66_district"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "DIstrict"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 0,
+            "width": 2,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "01736141",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "d8d1569c",
+                  "fields": [
+                    {
+                      "name": "sum(total_customers_per_district)",
+                      "expression": "SUM(`total_customers_per_district`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(total_customers_per_district)",
+                  "displayName": "Sum of total_customers_per_district"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Total this Month"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 3,
+            "width": 1,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "369ec57f",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "d8d1569c",
+                  "fields": [
+                    {
+                      "name": "sum(total_employees_per_district)",
+                      "expression": "SUM(`total_employees_per_district`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(total_employees_per_district)",
+                  "displayName": "Sum of total_employees_per_district"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Total this Month"
+              }
+            }
+          },
+          "position": {
+            "x": 1,
+            "y": 3,
+            "width": 1,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "e411d358",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "d8d1569c",
+                  "fields": [
+                    {
+                      "name": "sum(difference_in_customers_from_last_month)",
+                      "expression": "SUM(`difference_in_customers_from_last_month`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(difference_in_customers_from_last_month)",
+                  "displayName": "Sum of difference_in_customers_from_last_month"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Difference from Last Month"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 6,
+            "width": 1,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "6bed34d2",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "d8d1569c",
+                  "fields": [
+                    {
+                      "name": "sum(difference_in_employees_from_last_month)",
+                      "expression": "SUM(`difference_in_employees_from_last_month`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(difference_in_employees_from_last_month)",
+                  "displayName": "Sum of difference_in_employees_from_last_month"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Difference from Last Month"
+              }
+            }
+          },
+          "position": {
+            "x": 1,
+            "y": 6,
+            "width": 1,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "40e6aaeb",
+            "multilineTextboxSpec": {
+              "lines": [
+                "## Customers"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "6adf03d2",
+            "multilineTextboxSpec": {
+              "lines": [
+                "## Employees"
+              ]
+            }
+          },
+          "position": {
+            "x": 1,
+            "y": 2,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "e3e5d757",
+            "queries": [
+              {
+                "name": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b8219f699d9c8a3a1204279_customer",
+                "query": {
+                  "datasetName": "6ade5991",
+                  "fields": [
+                    {
+                      "name": "customer",
+                      "expression": "`customer`"
+                    },
+                    {
+                      "name": "customer_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "customer",
+                    "displayName": "customer",
+                    "queryName": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b8219f699d9c8a3a1204279_customer"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Customers"
+              }
+            }
+          },
+          "position": {
+            "x": 2,
+            "y": 8,
+            "width": 3,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "d9fa47c8",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "d8d1569c",
+                  "fields": [
+                    {
+                      "name": "sum(percent_total_products_sold)",
+                      "expression": "SUM(`percent_total_products_sold`)"
+                    },
+                    {
+                      "name": "sum(total_products_sold)",
+                      "expression": "SUM(`total_products_sold`)"
+                    },
+                    {
+                      "name": "district",
+                      "expression": "`district`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "sum(total_products_sold)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "axis": {
+                    "hideTitle": true,
+                    "hideLabels": true
+                  },
+                  "displayName": "Sum of total_products_sold"
+                },
+                "y": {
+                  "fieldName": "district",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "x-reversed"
+                    }
+                  },
+                  "displayName": "District"
+                },
+                "label": {
+                  "show": true
+                },
+                "extra": [
+                  {
+                    "fieldName": "sum(percent_total_products_sold)",
+                    "displayName": "v"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Sold Products per District"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 9,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "6b5ee57a",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "6ade5991",
+                  "fields": [
+                    {
+                      "name": "sum(total_products_bought)",
+                      "expression": "SUM(`total_products_bought`)"
+                    },
+                    {
+                      "name": "customer",
+                      "expression": "`customer`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "sum(total_products_bought)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "axis": {
+                    "hideTitle": true,
+                    "hideLabels": true
+                  },
+                  "displayName": "Sum of total_products_bought"
+                },
+                "y": {
+                  "fieldName": "customer",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "x-reversed"
+                    }
+                  },
+                  "displayName": "Customer"
+                },
+                "label": {
+                  "show": true
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 9,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "18073cba",
+            "queries": [
+              {
+                "name": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b8219f699d9c8a3a1204279_best_customer_rank",
+                "query": {
+                  "datasetName": "6ade5991",
+                  "fields": [
+                    {
+                      "name": "best_customer_rank",
+                      "expression": "`best_customer_rank`"
+                    },
+                    {
+                      "name": "best_customer_rank_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "best_customer_rank",
+                    "displayName": "best_customer_rank",
+                    "queryName": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f068153b8219f699d9c8a3a1204279_best_customer_rank"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Rank"
+              },
+              "selection": {
+                "defaultSelection": {
+                  "values": {
+                    "dataType": "INTEGER",
+                    "values": [
+                      {
+                        "value": "1"
+                      },
+                      {
+                        "value": "2"
+                      },
+                      {
+                        "value": "3"
+                      },
+                      {
+                        "value": "5"
+                      },
+                      {
+                        "value": "4"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 5,
+            "y": 8,
+            "width": 1,
+            "height": 1
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "d242dc38",
+      "displayName": "Demand forecast",
+      "layout": [
+        {
+          "widget": {
+            "name": "6624bc7a",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "008e693a",
+                  "fields": [
+                    {
+                      "name": "event_datetime",
+                      "expression": "`event_datetime`"
+                    },
+                    {
+                      "name": "sum(sum_quantity_products)",
+                      "expression": "SUM(`sum_quantity_products`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "event_datetime",
+                  "scale": {
+                    "type": "temporal"
+                  },
+                  "displayName": "event_datetime"
+                },
+                "y": {
+                  "fieldName": "sum(sum_quantity_products)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "quantity"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Cantidad de productos vendida con predicción para la siguiente hora"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "fa360d6a",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "cd775e5e",
+                  "fields": [
+                    {
+                      "name": "sum(sum_quantity_products)",
+                      "expression": "SUM(`sum_quantity_products`)"
+                    },
+                    {
+                      "name": "district",
+                      "expression": "`district`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "sum(sum_quantity_products)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "axis": {
+                    "hideLabels": true
+                  },
+                  "displayName": "Sum of sum_quantity_products"
+                },
+                "y": {
+                  "fieldName": "district",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "x-reversed"
+                    }
+                  },
+                  "displayName": "district"
+                },
+                "label": {
+                  "show": true
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Distribución de las ventas para la predicción de la siguiente hora"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 7,
+            "width": 6,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "3ea836b4",
+            "queries": [
+              {
+                "name": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f06c1c1d3316a1b35629cbaf1b3a4c_event_datetime",
+                "query": {
+                  "datasetName": "008e693a",
+                  "fields": [
+                    {
+                      "name": "event_datetime",
+                      "expression": "`event_datetime`"
+                    },
+                    {
+                      "name": "event_datetime_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-date-range-picker",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "event_datetime",
+                    "displayName": "event_datetime",
+                    "queryName": "dashboards/01f068153b8118cfad990519a3365e91/datasets/01f06c1c1d3316a1b35629cbaf1b3a4c_event_datetime"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": false
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 6,
+            "width": 6,
+            "height": 1
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    }
+  }
+}
